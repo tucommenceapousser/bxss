@@ -8,7 +8,7 @@ var chatId = '31337'; // Your "chatId" Here
 	| |_) >  <\__ \__ \___| ||  __/ |  __/
 	|_.__/_/\_\___/___/    \__\___|_|\___|
 	------ Blind XSS Alert Telegram ------
-	                           zerobyte.id
+	                           trhacknon
 */
 
 function telegramSend(tokenBot, chatId) {
