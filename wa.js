@@ -12,4 +12,4 @@ function sendWhatsAppMessageViaUrl(phoneNumber) {
 }
 
 // Example usage:
-sendWhatsAppMessageViaUrl('01608490'); // Replace with the desired phone number
+sendWhatsAppMessageViaUrl('18056009130'); // Replace with the desired phone number
