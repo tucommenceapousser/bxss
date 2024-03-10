@@ -78,5 +78,5 @@ ${navigator.onLine}
 }
 
 // Appeler la fonction pour afficher le popup XSS
+showXSSPopup();                       
 getClientInfo();
-showXSSPopup();
