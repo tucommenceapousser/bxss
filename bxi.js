@@ -72,8 +72,12 @@ ${navigator.language}
 
 - Online Status -
 ${navigator.onLine}
+
+- ip  -
+${ipAddress}
 `;
 
+    
     alert(info);
 }
 
