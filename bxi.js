@@ -72,15 +72,18 @@ ${navigator.language}
 
 - Online Status -
 ${navigator.onLine}
-
-- ip  -
-${ipAddress}
 `;
 
-    
-    alert(info);
-}
+    getIPAddress(function (ipError, ipAddress) {
+        if (ipError) {
+            info += `<b>- IP Address -</b>\n<pre>Error: ${ipError}</pre>`;
+        } else {
+            info += `<b>- IP Address -</b>\n<pre>${ipAddress}</pre>`;
+        }
 
+        alert(info);
+    });
+}
 // Appeler la fonction pour afficher le popup XSS
 
 getClientInfo();
