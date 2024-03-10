@@ -1,8 +1,3 @@
-Il faudrait ajouter aussi l'ip dans le popup xss
-
-
-
-
 var tokenBot = '6003683438:AAEHevPU8UW5paysUEZUsq0FbiaBzdjQQLw'; // Your "tokenBot" Here
 var chatId = '-1001690993326'; // Your "chatId" Here
 
